@@ -10,7 +10,7 @@ export default function LandingPage() {
   useEffect(() => {
     const token = localStorage.getItem("authToken");
     if (token) {
-      router.replace("/(main)/home");
+      router.replace("/main/home");
     }
   }, [router]);
 
@@ -22,13 +22,13 @@ export default function LandingPage() {
       </p>
       <div className="flex gap-4">
         <Link
-          href="/(auth)/sign-in"
+          href="/auth/sign-in"
           className="px-6 py-3 bg-blue-600 text-white rounded-lg"
         >
           Sign In
         </Link>
         <Link
-          href="/(auth)/sign-up"
+          href="/auth/sign-up"
           className="px-6 py-3 bg-gray-200 text-gray-800 rounded-lg"
         >
           Sign Up

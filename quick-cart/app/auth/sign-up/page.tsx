@@ -18,11 +18,9 @@ export default function SignUp() {
         email,
         password,
       });
-      console.log("User registered:", response.data);
-      localStorage.setItem("authToken", response.data.token || "dummy"); // store JWT if backend returns it
-      router.push("/(main)/home"); // redirect to homepage
+      localStorage.setItem("authToken", response.data.token || "dummy");
+      router.push("/main/home"); // ✅ updated
     } catch (err: any) {
-      console.error("Registration error:", err.response?.data || err.message);
       setError(err.response?.data?.detail || "Registration failed");
     }
   };
@@ -30,7 +28,6 @@ export default function SignUp() {
   return (
     <main className="min-h-screen flex flex-col items-center justify-center bg-gray-50 px-4">
       <h1 className="text-3xl font-bold mb-6">Sign Up</h1>
-
       <input
         type="text"
         placeholder="Username"
@@ -52,14 +49,12 @@ export default function SignUp() {
         onChange={(e) => setPassword(e.target.value)}
         className="mb-2 px-4 py-2 border rounded"
       />
-
       <button
         onClick={handleSignUp}
         className="px-6 py-3 bg-green-600 text-white rounded-lg"
       >
         Sign Up
       </button>
-
       {error && <p className="text-red-600 mt-2">{error}</p>}
     </main>
   );
