@@ -1,7 +1,15 @@
 "use client";
+
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const Hero = () => {
+  const router = useRouter();
+
+  const handleShopNow = () => {
+    router.push("/products"); // Navigate to the products page
+  };
+
   return (
     <section className="relative w-full min-h-screen">
       {/* Hero background image */}
@@ -22,7 +30,10 @@ const Hero = () => {
           <p className="text-lg md:text-xl text-white/90 mb-6 drop-shadow-md">
             Thousands of options updated daily. Don’t miss out on exclusive discounts — grab yours before they’re gone!
           </p>
-          <button className="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-blue-700 transition font-semibold">
+          <button
+            onClick={handleShopNow}
+            className="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-blue-700 transition font-semibold"
+          >
             Shop Now
           </button>
         </div>
