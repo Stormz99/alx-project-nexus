@@ -1,12 +1,21 @@
-import type { ReactNode } from "react";
+"use client";
 
-export default function AuthLayout({ children }: { children: ReactNode }) {
+import { ReactNode } from "react";
+import Hero from "@/components/Hero";
+
+interface AuthLayoutProps {
+  children: ReactNode;
+}
+
+const Layout = ({ children }: AuthLayoutProps) => {
   return (
-    <div>
-      <header>
-        <h1>Auth Section</h1>
-      </header>
-      <main>{children}</main>
+    <div className="min-h-screen flex flex-col">
+      <Hero />
+      <div className="flex flex-col items-center justify-center mt-10 px-4">
+        {children}
+      </div>
     </div>
   );
-}
+};
+
+export default Layout;

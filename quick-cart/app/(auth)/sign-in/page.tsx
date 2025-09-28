@@ -1,49 +1,34 @@
-// Cartify/app/(auth)/sign-in/page.tsx
-
 "use client";
 
-import React from "react";
+import Link from "next/link";
 
-export default function SignInPage() {
+const SignInPage = () => {
   return (
-    <main className="flex min-h-screen items-center justify-center bg-gray-50">
-      <div className="w-full max-w-md p-6 bg-white shadow rounded-lg">
-        <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+    <div className="w-full max-w-md p-6 bg-white rounded-xl shadow-lg">
+      <h2 className="text-2xl font-bold mb-6 text-center text-blue-600">Sign In</h2>
+      <form className="flex flex-col gap-4">
+        <input
+          type="email"
+          placeholder="Email"
+          className="px-4 py-2 border rounded-lg outline-none"
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          className="px-4 py-2 border rounded-lg outline-none"
+        />
+        <button className="bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
           Sign In
-        </h1>
-        <form className="space-y-4">
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              className="mt-1 block w-full border border-gray-300 rounded-md p-2 text-sm focus:border-black focus:ring-black"
-              placeholder="you@example.com"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              className="mt-1 block w-full border border-gray-300 rounded-md p-2 text-sm focus:border-black focus:ring-black"
-              placeholder="********"
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="w-full bg-black text-white py-2 px-4 rounded-md hover:bg-gray-800 transition"
-          >
-            Sign In
-          </button>
-        </form>
-      </div>
-    </main>
+        </button>
+      </form>
+      <p className="mt-4 text-center text-gray-600">
+        New here?{" "}
+        <Link href="/(auth)/sign-up" className="text-blue-600 font-semibold hover:underline">
+          Sign Up
+        </Link>
+      </p>
+    </div>
   );
-}
+};
+
+export default SignInPage;
