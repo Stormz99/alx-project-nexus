@@ -1,68 +1,44 @@
 "use client";
+
 import Link from "next/link";
-import { navLinks } from "@/constants/page";
 import { usePathname } from "next/navigation";
-import SearchBar from "@/components/SearchBar";
-import Button from "@/components/Button";
-import ShoppingCartIcon from "@/components/ShoppingCartIcon";
-
-
+import { navLinks } from "@/constants/page";
+import SearchBar from "./SearchBar";
+import Button from "./Button";
 
 const Navbar = () => {
+  const pathname = usePathname();
 
-    const pathname = usePathname();
+  return (
+    <nav className="bg-white shadow-md py-4 px-6 flex items-center justify-between">
+      <div className="flex items-center space-x-8">
+        <Link href="/" className="text-2xl font-bold text-blue-600">
+          GoCart
+        </Link>
+        <ul className="flex space-x-6">
+          {navLinks.map((link) => (
+            <li key={link.name}>
+              <Link
+                href={link.path}
+                className={`hover:text-blue-600 transition ${
+                  pathname === link.path
+                    ? "text-blue-600 font-semibold"
+                    : "text-gray-700"
+                }`}
+              >
+                {link.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
 
-
-    return (
-        <header className="w-full py-4">
-            <div className="container mx-auto flex h-16 items-center justify-between px-4">
-                <div>
-                    <Link href="/" className="text-xl">
-                        Quick <span>Cart</span>
-                    </Link>
-                </div>
-
-                <nav className="">
-                    <ul className="flex gap-4">
-                       {
-                            navLinks.map((link, index) => (
-                                <li key={index}>
-                                    <Link
-                                        href={link.path}
-                                        className={`px-3 py-2 rounded-md transition ${
-                                            pathname === link.path
-                                            ? "bg-blue-500 text-white"
-                                            : "hover:bg-gray-100"
-                                        }`}
-                                    >
-                                        {link.name}
-                                    </Link>
-                                </li>
-                            ))
-                       }
-                    </ul>
-                </nav>
-
-                <div className="flex items-center gap-4">
-                    <div className="flex gap-2 items-center">
-                        <SearchBar />
-                        <Button
-                            label="Search"
-                    
-                            className="hidden sm:flex items-center gap-2 rounded-md ring-1 ring-gray-200 px-2 py-1 shadow-md cursor-pointer"
-                        />
-                    </div>
-                    
-                   <div>
-                       <ShoppingCartIcon />
-                   </div>
-                </div>
-            </div>
-            
-            
-           
-        </header>
-    )
-}
+      <div className="flex items-center space-x-4">
+        <SearchBar />
+        <Button>Cart</Button>
+      </div>
+    </nav>
+  );
+};
 
 export default Navbar;

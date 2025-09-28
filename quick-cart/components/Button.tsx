@@ -1,14 +1,15 @@
+"use client";
 import React from "react";
 
 type ButtonProps = {
   className?: string;
-  label: string;
+  children: React.ReactNode;
 };
 
-const Button: React.FC<ButtonProps> = ({ className, label }) => {
+const Button: React.FC<ButtonProps> = ({ className, children }) => {
   return (
     <button className={className}>
-      {label}
+      {children}
     </button>
   );
 };
