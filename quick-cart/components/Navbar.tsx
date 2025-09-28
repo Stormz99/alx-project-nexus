@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { navLinks } from "@/constants/page";
 import SearchBar from "./SearchBar";
 import Button from "./Button";
+import ShoppingCartIcon from "./ShoppingCartIcon";
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -35,7 +36,9 @@ const Navbar = () => {
 
       <div className="flex items-center space-x-4">
         <SearchBar />
-        <Button>Cart</Button>
+        <Button>
+          <ShoppingCartIcon count={0} />
+        </Button>
       </div>
     </nav>
   );

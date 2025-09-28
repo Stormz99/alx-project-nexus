@@ -1,22 +1,21 @@
 "use client";
 
-// import useCartStore from "@/stores/cartStore";
-import { ShoppingCart } from "lucide-react";
-import Link from "next/link";
+import { FaShoppingCart } from "react-icons/fa";
 
-const ShoppingCartIcon = () => {
-//   const { cart, hasHydrated } = useCartStore();
+type ShoppingCartIconProps = {
+  count?: number;
+};
 
-//   if (!hasHydrated) return null;
+const ShoppingCartIcon: React.FC<ShoppingCartIconProps> = ({ count = 0 }) => {
   return (
-    <Link href="/cart" className="relative">
-      <ShoppingCart 
-        className="w-6 h-6 text-gray-600" 
-      />
-      <span className="absolute -top-3 -right-8 bg-amber-400 text-gray-600 rounded-full w-4 h-4 flex items-center justify-center text-xs font-medium">
-        {/* {cart.reduce((acc, item) => acc + item.quantity, 0)} */}
-      </span>
-    </Link>
+    <div className="relative">
+      <FaShoppingCart size={24} className="text-gray-700" />
+      {count > 0 && (
+        <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold px-2 rounded-full">
+          {count}
+        </span>
+      )}
+    </div>
   );
 };
 

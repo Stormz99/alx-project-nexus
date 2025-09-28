@@ -1,20 +1,28 @@
-import { Search } from "lucide-react"
+"use client";
+
+import { useState } from "react";
 
 const SearchBar = () => {
+  const [query, setQuery] = useState("");
+
+  const handleSearch = () => {
+    console.log("Search for:", query);
+  };
+
   return (
-    <div className='hidden sm:flex items-center gap-2 rounded-md ring-1 ring-gray-200 px-2 py-1 shadow-md'>
-
-        <Search 
-            className="w-4 h-4 text-gray-500"
-        />
-        
-        <input 
-            id="search" 
-            placeholder="Search..." 
-            className="text-sm outline-0"
-        />
+    <div className="flex items-center border rounded-lg overflow-hidden">
+      <input
+        type="text"
+        placeholder="Search products..."
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        className="px-4 py-2 outline-none w-40 md:w-64"
+      />
+      <button onClick={handleSearch} className="bg-blue-600 text-white px-4 py-2 hover:bg-blue-700 transition">
+        Search
+      </button>
     </div>
-  )
-}
+  );
+};
 
-export default SearchBar
+export default SearchBar;
