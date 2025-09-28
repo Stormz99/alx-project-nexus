@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useCart } from "@/context/CartContext";
+import { useState } from "react";
 
 const sampleProducts = [
   { id: "1", name: "Wireless Earbuds", price: 15000, image: "/images/earbuds.png" },
@@ -12,7 +13,14 @@ const sampleProducts = [
 ];
 
 export default function ProductsPage() {
-  const { addToCart } = useCart(); // get addToCart from context
+  const { addToCart } = useCart();
+  const [addedId, setAddedId] = useState<string | null>(null);
+
+  const handleAddToCart = (product: typeof sampleProducts[0]) => {
+    addToCart({ ...product, quantity: 1 });
+    setAddedId(product.id);
+    setTimeout(() => setAddedId(null), 1000); // Reset feedback after 1s
+  };
 
   return (
     <main className="min-h-screen bg-gray-50 py-12 px-6">
@@ -49,10 +57,12 @@ export default function ProductsPage() {
                   View Details
                 </Link>
                 <button
-                  className="bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition"
-                  onClick={() => addToCart({ ...product, quantity: 1 })}
+                  className={`bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition ${
+                    addedId === product.id ? "opacity-70" : ""
+                  }`}
+                  onClick={() => handleAddToCart(product)}
                 >
-                  Add to Cart
+                  {addedId === product.id ? "Added!" : "Add to Cart"}
                 </button>
               </div>
             </div>
