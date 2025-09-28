@@ -37,7 +37,8 @@ const Navbar = () => {
       <div className="flex items-center space-x-4">
         <SearchBar />
         <Button>
-          <ShoppingCartIcon count={0} />
+          {/* Remove count prop */}
+          <ShoppingCartIcon />
         </Button>
       </div>
     </nav>

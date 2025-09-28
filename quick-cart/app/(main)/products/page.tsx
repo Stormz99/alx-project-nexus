@@ -2,35 +2,18 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useCart } from "@/context/CartContext";
 
 const sampleProducts = [
-  {
-    id: "1",
-    name: "Wireless Earbuds",
-    price: 15000,
-    image: "/images/earbuds.png",
-  },
-  {
-    id: "2",
-    name: "Smart Watch",
-    price: 25000,
-    image: "/images/smartwatch.png",
-  },
-  {
-    id: "3",
-    name: "Laptop Backpack",
-    price: 12000,
-    image: "/images/backpack.png",
-  },
-  {
-    id: "4",
-    name: "Bluetooth Speaker",
-    price: 18000,
-    image: "/images/speaker.png",
-  },
+  { id: "1", name: "Wireless Earbuds", price: 15000, image: "/images/earbuds.png" },
+  { id: "2", name: "Smart Watch", price: 25000, image: "/images/smartwatch.png" },
+  { id: "3", name: "Laptop Backpack", price: 12000, image: "/images/backpack.png" },
+  { id: "4", name: "Bluetooth Speaker", price: 18000, image: "/images/speaker.png" },
 ];
 
 export default function ProductsPage() {
+  const { addToCart } = useCart(); // get addToCart from context
+
   return (
     <main className="min-h-screen bg-gray-50 py-12 px-6">
       <div className="max-w-4xl mx-auto text-center mb-12">
@@ -65,7 +48,10 @@ export default function ProductsPage() {
                 >
                   View Details
                 </Link>
-                <button className="bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition">
+                <button
+                  className="bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition"
+                  onClick={() => addToCart({ ...product, quantity: 1 })}
+                >
                   Add to Cart
                 </button>
               </div>
