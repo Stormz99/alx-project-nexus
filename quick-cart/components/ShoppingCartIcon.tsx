@@ -1,20 +1,19 @@
 "use client";
 
 import { FaShoppingCart } from "react-icons/fa";
-import { useCart } from "@/context/CartContext";
 
-const ShoppingCartIcon = () => {
-  const { cart } = useCart();
+type ShoppingCartIconProps = {
+  count?: number;
+  onClick?: () => void; // Click handler
+};
 
-  // Calculate total number of items in the cart
-  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-
+const ShoppingCartIcon: React.FC<ShoppingCartIconProps> = ({ count = 0, onClick }) => {
   return (
-    <div className="relative cursor-pointer">
+    <div className="relative cursor-pointer" onClick={onClick}>
       <FaShoppingCart size={24} className="text-gray-700" />
-      {totalItems > 0 && (
+      {count > 0 && (
         <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold px-2 rounded-full">
-          {totalItems}
+          {count}
         </span>
       )}
     </div>

@@ -1,14 +1,21 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { navLinks } from "@/constants/page";
 import SearchBar from "./SearchBar";
 import Button from "./Button";
 import ShoppingCartIcon from "./ShoppingCartIcon";
+import { useCart } from "@/context/CartContext";
 
 const Navbar = () => {
   const pathname = usePathname();
+  const router = useRouter();
+  const { cart } = useCart(); // get cart state from context
+
+  const handleCartClick = () => {
+    router.push("/cart"); // navigate to the cart page
+  };
 
   return (
     <nav className="bg-white shadow-md py-4 px-6 flex items-center justify-between">
@@ -36,9 +43,8 @@ const Navbar = () => {
 
       <div className="flex items-center space-x-4">
         <SearchBar />
-        <Button>
-          {/* Remove count prop */}
-          <ShoppingCartIcon />
+        <Button onClick={handleCartClick}>
+          <ShoppingCartIcon count={cart.length} />
         </Button>
       </div>
     </nav>
