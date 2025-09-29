@@ -2,4 +2,5 @@ Django>=4.2
 djangorestframework>=3.14
 psycopg2-binary>=2.9
 djangorestframework-simplejwt>=5.2
-drf-yasg>=1.21.11
+drf-yasg==1.21.11
+
