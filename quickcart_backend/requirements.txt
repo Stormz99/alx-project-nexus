@@ -6,3 +6,10 @@ gunicorn
 dj-database-url
 psycopg2-binary
 whitenoise
+Django>=4.2
+djangorestframework>=3.14
+psycopg2-binary>=2.9
+djangorestframework-simplejwt>=5.2
+drf-yasg==1.21.11
+gunicorn
+
