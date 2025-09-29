@@ -37,4 +37,5 @@ class AuthService {
     return user ? JSON.parse(user) : null;
   }
 }
-export default new AuthService();
+const authService = new AuthService();
+export default authService;

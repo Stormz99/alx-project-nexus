@@ -10,14 +10,15 @@ export default function SignIn() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleSignIn = async () => {
+  const handleSignIn = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     try {
       const response = await axiosInstance.post("/auth/login/", {
         username,
         password,
       });
       localStorage.setItem("authToken", response.data.access); // store JWT
-      router.push("/main/home"); // ✅ updated
+      router.push("/main/home"); //
     } catch (err: any) {
       setError(err.response?.data?.detail || "Login failed");
     }

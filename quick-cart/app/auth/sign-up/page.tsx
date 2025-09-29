@@ -11,7 +11,8 @@ export default function SignUp() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleSignUp = async () => {
+  const handleSignUp = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     try {
       const response = await axiosInstance.post("/auth/register/", {
         username,
@@ -19,7 +20,7 @@ export default function SignUp() {
         password,
       });
       localStorage.setItem("authToken", response.data.token || "dummy");
-      router.push("/main/home"); // ✅ updated
+      router.push("/main/home"); 
     } catch (err: any) {
       setError(err.response?.data?.detail || "Registration failed");
     }
