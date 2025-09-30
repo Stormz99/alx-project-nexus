@@ -28,7 +28,7 @@ const Hero = () => {
             Your Style, Your Store
           </h1>
           <p className="text-lg md:text-xl text-white/90 mb-6 drop-shadow-md">
-            Thousands of options updated daily. Don't miss out on exclusive discounts — grab yours before they're gone!
+            Thousands of options updated daily. Don&apos;t miss out on exclusive discounts — grab yours before they&apos;re gone!
           </p>
           <button
             onClick={handleShopNow}
