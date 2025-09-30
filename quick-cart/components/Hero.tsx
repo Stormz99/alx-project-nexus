@@ -7,11 +7,11 @@ const Hero = () => {
   const router = useRouter();
 
   const handleShopNow = () => {
-    router.push("/products"); // Navigate to the products page
+    router.push("/main/products");
   };
 
   return (
-    <section className="relative w-full min-h-screen">
+    <section className="relative w-full h-[600px] md:h-[700px]">
       {/* Hero background image */}
       <Image
         src="/images/hero.jpg"
@@ -28,7 +28,7 @@ const Hero = () => {
             Your Style, Your Store
           </h1>
           <p className="text-lg md:text-xl text-white/90 mb-6 drop-shadow-md">
-            Thousands of options updated daily. Don’t miss out on exclusive discounts — grab yours before they’re gone!
+            Thousands of options updated daily. Don't miss out on exclusive discounts — grab yours before they're gone!
           </p>
           <button
             onClick={handleShopNow}

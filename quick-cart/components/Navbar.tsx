@@ -11,16 +11,16 @@ import { useCart } from "@/context/CartContext";
 const Navbar = () => {
   const pathname = usePathname();
   const router = useRouter();
-  const { cart } = useCart(); // get cart state from context
+  const { cart } = useCart();
 
   const handleCartClick = () => {
-    router.push("/cart"); // navigate to the cart page
+    router.push("/main/cart");
   };
 
   return (
     <nav className="bg-white shadow-md py-4 px-6 flex items-center justify-between">
       <div className="flex items-center space-x-8">
-        <Link href="/" className="text-2xl font-bold text-blue-600">
+        <Link href="/main/home" className="text-2xl font-bold text-blue-600">
           GoCart
         </Link>
         <ul className="flex space-x-6">

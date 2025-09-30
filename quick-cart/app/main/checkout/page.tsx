@@ -12,12 +12,12 @@ export default function CheckoutPage() {
   const handlePayment = (method: string) => {
     // TODO: Integrate backend payment logic here
     alert(`You selected ${method}. Total: ₦${total.toLocaleString()}`);
-    router.push("/"); // Redirect to home or success page after payment
+    router.push("/main/home");
   };
 
   if (cart.length === 0) {
     return (
-      <div className="max-w-4xl mx-auto p-6">
+      <div className="max-w-4xl mx-auto p-6 min-h-screen">
         <h1 className="text-3xl font-bold mb-4">Checkout</h1>
         <p>Your cart is empty. Add some products first.</p>
       </div>
@@ -25,7 +25,7 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div className="max-w-4xl mx-auto p-6 min-h-screen">
       <h1 className="text-3xl font-bold mb-6">Checkout</h1>
 
       <div className="mb-6">

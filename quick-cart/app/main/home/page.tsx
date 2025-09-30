@@ -5,12 +5,12 @@ import Hero from "@/components/Hero";
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen flex flex-col items-center justify-start bg-gradient-to-b from-blue-50 to-white px-4">
+    <main className="min-h-screen flex flex-col items-center justify-start bg-gradient-to-b from-blue-50 to-white">
       {/* Hero Section */}
       <Hero />
 
       {/* CTA Section */}
-      <div className="text-center space-y-6 max-w-2xl mt-16">
+      <div className="text-center space-y-6 max-w-2xl mt-16 px-4">
         <h1 className="text-5xl font-extrabold text-black">
           Welcome to <span className="text-blue-600">GoCart</span>
         </h1>
@@ -21,13 +21,13 @@ export default function HomePage() {
 
         <div className="flex justify-center gap-4">
           <Link
-            href="/products"
+            href="/main/products"
             className="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition"
           >
             Start Shopping
           </Link>
           <Link
-            href="/about"
+            href="/main/about"
             className="bg-gray-100 text-gray-800 px-6 py-3 rounded-lg shadow-md hover:bg-gray-200 transition"
           >
             Learn More
@@ -36,7 +36,7 @@ export default function HomePage() {
       </div>
 
       {/* Feature Highlights */}
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 max-w-5xl w-full">
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 max-w-5xl w-full px-4 pb-16">
         <div className="p-6 bg-white rounded-xl shadow hover:shadow-lg transition">
           <h3 className="text-xl font-semibold text-blue-600">Fast Delivery</h3>
           <p className="text-gray-600 mt-2">

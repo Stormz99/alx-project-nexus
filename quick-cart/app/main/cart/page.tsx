@@ -12,16 +12,16 @@ export default function CartPage() {
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   const handleProceed = () => {
-    router.push("/checkout");
+    router.push("/main/checkout");
   };
 
   if (cart.length === 0) {
     return (
-      <div className="max-w-4xl mx-auto p-6">
+      <div className="max-w-4xl mx-auto p-6 min-h-screen">
         <h1 className="text-3xl font-bold mb-4">Your Cart</h1>
         <p>
           Your cart is empty.{" "}
-          <Link href="/" className="text-blue-600 underline">
+          <Link href="/main/products" className="text-blue-600 underline">
             Continue Shopping
           </Link>
         </p>
@@ -30,7 +30,7 @@ export default function CartPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div className="max-w-4xl mx-auto p-6 min-h-screen">
       <h1 className="text-3xl font-bold mb-6">Your Cart</h1>
 
       <div className="mb-6">
@@ -76,7 +76,7 @@ export default function CartPage() {
       </ul>
 
       <div className="mt-6 flex justify-between items-center">
-        <Link href="/" className="text-blue-600 underline">
+        <Link href="/main/products" className="text-blue-600 underline">
           Continue Shopping
         </Link>
         <div className="text-xl font-bold">Total: ₦{total.toLocaleString()}</div>

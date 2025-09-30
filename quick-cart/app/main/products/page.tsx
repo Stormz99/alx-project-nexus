@@ -19,7 +19,7 @@ export default function ProductsPage() {
   const handleAddToCart = (product: typeof sampleProducts[0]) => {
     addToCart({ ...product, quantity: 1 });
     setAddedId(product.id);
-    setTimeout(() => setAddedId(null), 1000); // Reset feedback after 1s
+    setTimeout(() => setAddedId(null), 1000);
   };
 
   return (
@@ -51,7 +51,7 @@ export default function ProductsPage() {
               <p className="text-gray-600 mb-4">₦{product.price.toLocaleString()}</p>
               <div className="flex justify-between items-center">
                 <Link
-                  href={`/products/${product.id}`}
+                  href={`/main/products/${product.id}`}
                   className="text-blue-600 font-medium hover:underline"
                 >
                   View Details

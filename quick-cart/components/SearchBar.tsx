@@ -38,7 +38,7 @@ const SearchBar = () => {
     setQuery("");
     setResults([]);
     setShowResults(false);
-    router.push(`/products/${id}`);
+    router.push(`/main/products/${id}`);
   };
 
   return (
@@ -48,7 +48,7 @@ const SearchBar = () => {
         placeholder="Search products..."
         value={query}
         onChange={handleSearch}
-        className="border rounded-lg px-4 py-2 w-40 md:w-64 focus:outline-none focus:ring-2 focus:ring-blue-600"
+        className="border rounded-lg px-4 py-2 w-40 md:w-64 focus:outline-none focus:ring-2 focus:ring-blue-600 text-black"
       />
 
       {showResults && (
@@ -57,7 +57,7 @@ const SearchBar = () => {
             results.map((product) => (
               <div
                 key={product.id}
-                className="px-4 py-2 cursor-pointer hover:bg-blue-100"
+                className="px-4 py-2 cursor-pointer hover:bg-blue-100 text-black"
                 onClick={() => handleSelect(product.id)}
               >
                 {product.name}
