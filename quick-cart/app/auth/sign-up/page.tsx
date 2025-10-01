@@ -27,8 +27,10 @@ export default function SignUpPage() {
         password_confirm: passwordConfirm,
       });
 
+      localStorage.setItem("access_token", res.data.tokens.access); // store JWT
+      localStorage.setItem("user", JSON.stringify(res.data.user)); // store user info
       alert("Registration successful");
-      router.push("/auth/sign-in");
+      router.push("/main/home"); // auto-login redirect to home
     } catch (error: any) {
       console.error("Sign-up error:", error.response || error);
       alert(`Sign-up failed: ${servermsgOr(error.response?.data)}`);

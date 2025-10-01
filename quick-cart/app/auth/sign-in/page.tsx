@@ -14,9 +14,10 @@ export default function SignInPage() {
     e.preventDefault();
     try {
       const res = await axiosInstance.post("/auth/login/", { email, password });
-      localStorage.setItem("access_token", res.data.access); // store JWT token
+      localStorage.setItem("access_token", res.data.tokens.access); // store JWT
+      localStorage.setItem("user", JSON.stringify(res.data.user)); // store user info
       alert("Sign-in successful");
-      router.push("/");
+      router.push("/main/home"); // redirect to home
     } catch (error: any) {
       console.error("Sign-in error:", error.response || error);
       alert(`Sign-in failed: ${servermsgOr(error.response?.data)}`);

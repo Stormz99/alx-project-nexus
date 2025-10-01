@@ -8,15 +8,14 @@ export default function LandingPage() {
   const router = useRouter();
 
   useEffect(() => {
-    const token = localStorage.getItem("authToken");
+    const token = localStorage.getItem("access_token");
     if (token) {
-      router.replace("/main/home");
+      router.replace("/main/home"); // redirect to home if logged in
     }
   }, [router]);
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-blue-50 to-white px-4">
-      {/* Welcome Section */}
       <div className="text-center space-y-6 max-w-2xl">
         <h1 className="text-5xl font-extrabold text-black">
           Welcome to <span className="text-blue-600">GoCart</span>
