@@ -1,220 +1,71 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useState } from "react";
-import Link from "next/link";
-import axiosInstance from "../../../axiosInstance";
+import { useRouter } from "next/navigation";
 
-export default function SignUp() {
+export default function SignUpPage() {
   const router = useRouter();
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    first_name: "",
-    last_name: "",
-    password: "",
-    password_confirm: "",
-  });
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSignUp = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError("");
-    setSuccess(false);
-    setLoading(true);
 
     try {
-      const response = await axiosInstance.post("/auth/register/", formData);
-      
-      // Show success message
-      setSuccess(true);
-      
-      // Clear form
-      setFormData({
-        username: "",
-        email: "",
-        first_name: "",
-        last_name: "",
-        password: "",
-        password_confirm: "",
+      const res = await fetch("/api/auth/sign-up", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, password }),
       });
-    } catch (err: any) {
-      console.error("Registration error:", err.response?.data);
-      
-      if (err.response?.data) {
-        const errorData = err.response.data;
-        if (typeof errorData === "object") {
-          const errorMessages = Object.entries(errorData)
-            .map(([field, messages]) => {
-              const msgArray = Array.isArray(messages) ? messages : [messages];
-              return `${field}: ${msgArray.join(", ")}`;
-            })
-            .join("\n");
-          setError(errorMessages);
-        } else {
-          setError("Registration failed. Please try again.");
-        }
+
+      if (res.ok) {
+        router.push("/auth/sign-in");
       } else {
-        setError("Network error. Please check your connection.");
+        const data: { message?: string } = await res.json();
+        alert(data.message || "Failed to sign up");
       }
-    } finally {
-      setLoading(false);
+    } catch (error) {
+      console.error("Sign-up error:", error);
+      alert("Something went wrong, please try again.");
     }
   };
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center bg-gray-50 px-4">
-      <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8">
-        <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">Sign Up</h1>
-        
-        {success ? (
-          <div className="text-center">
-            <div className="mb-6 p-6 bg-green-100 border-2 border-green-500 rounded-lg">
-              <svg
-                className="w-16 h-16 text-green-500 mx-auto mb-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
-              <h2 className="text-2xl font-bold text-green-700 mb-2">
-                Account Created Successfully!
-              </h2>
-              <p className="text-gray-700 mb-4">
-                Your account has been created. You can now sign in.
-              </p>
-            </div>
-            
-            <Link
-              href="/auth/sign-in"
-              className="inline-block w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-semibold transition text-center"
-            >
-              Click Here to Sign In
-            </Link>
-            
-            <button
-              onClick={() => setSuccess(false)}
-              className="mt-3 text-gray-600 hover:text-gray-800 text-sm"
-            >
-              Create another account
-            </button>
-          </div>
-        ) : (
-          <>
-            <form onSubmit={handleSignUp} className="space-y-4">
-              <div>
-                <input
-                  type="text"
-                  name="username"
-                  placeholder="Username"
-                  value={formData.username}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 text-black"
-                  required
-                />
-              </div>
-
-              <div>
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 text-black"
-                  required
-                />
-              </div>
-
-              <div>
-                <input
-                  type="text"
-                  name="first_name"
-                  placeholder="First Name"
-                  value={formData.first_name}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 text-black"
-                  required
-                />
-              </div>
-
-              <div>
-                <input
-                  type="text"
-                  name="last_name"
-                  placeholder="Last Name"
-                  value={formData.last_name}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 text-black"
-                  required
-                />
-              </div>
-
-              <div>
-                <input
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 text-black"
-                  required
-                  minLength={8}
-                />
-              </div>
-
-              <div>
-                <input
-                  type="password"
-                  name="password_confirm"
-                  placeholder="Confirm Password"
-                  value={formData.password_confirm}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 text-black"
-                  required
-                  minLength={8}
-                />
-              </div>
-
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed font-semibold transition"
-              >
-                {loading ? "Creating Account..." : "Sign Up"}
-              </button>
-            </form>
-
-            {error && (
-              <div className="mt-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg whitespace-pre-line text-sm">
-                {error}
-              </div>
-            )}
-
-            <p className="mt-4 text-center text-gray-600">
-              Already have an account?{" "}
-              <Link href="/auth/sign-in" className="text-green-600 hover:underline font-semibold">
-                Sign In
-              </Link>
-            </p>
-          </>
-        )}
-      </div>
-    </main>
+    <div className="flex items-center justify-center min-h-screen">
+      <form onSubmit={handleSubmit} className="p-6 bg-white rounded shadow-md">
+        <h1 className="mb-4 text-xl font-bold">Sign Up</h1>
+        <input
+          type="text"
+          placeholder="Name"
+          className="w-full mb-2 p-2 border rounded"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
+        <input
+          type="email"
+          placeholder="Email"
+          className="w-full mb-2 p-2 border rounded"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          className="w-full mb-2 p-2 border rounded"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <button
+          type="submit"
+          className="w-full p-2 mt-2 text-white bg-green-600 rounded hover:bg-green-700"
+        >
+          Sign Up
+        </button>
+      </form>
+    </div>
   );
 }
