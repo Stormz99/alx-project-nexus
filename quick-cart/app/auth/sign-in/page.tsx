@@ -12,25 +12,38 @@ export default function SignInPage() {
     e.preventDefault();
 
     try {
-      // Send login request to backend
       const res = await fetch("/api/auth/login/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
 
+      const text = await res.text();
+      let body: any = text;
+      try { body = JSON.parse(text); } catch {}
+
+      console.log("Sign-in response status:", res.status);
+      console.log("Sign-in response body:", body);
+
       if (res.ok) {
-        // Redirect to homepage after login
+        alert("Sign-in successful");
         router.push("/");
       } else {
-        const data: { message?: string } = await res.json();
-        alert(data.message || "Failed to sign in");
+        alert(`Sign-in failed (status ${res.status}): ${servermsgOr(body)}`);
       }
     } catch (error) {
-      console.error("Sign-in error:", error);
-      alert("Something went wrong, please try again.");
+      console.error("Sign-in fetch error:", error);
+      alert(`Network or fetch error: ${String(error)}`);
     }
   };
+
+  function servermsgOr(body: any) {
+    if (!body) return "No response body";
+    if (typeof body === "string") return body;
+    if (body.error) return body.error;
+    if (body.detail) return body.detail;
+    return JSON.stringify(body);
+  }
 
   return (
     <div className="flex items-center justify-center min-h-screen">

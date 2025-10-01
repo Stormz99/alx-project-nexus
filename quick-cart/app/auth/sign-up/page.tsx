@@ -16,7 +16,7 @@ export default function SignUpPage() {
     e.preventDefault();
 
     try {
-      // Send registration request to backend
+      // POST to backend via Netlify proxy (trailing slash kept)
       const res = await fetch("/api/auth/register/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -30,18 +30,36 @@ export default function SignUpPage() {
         }),
       });
 
+      // Read raw text, then try to parse JSON for nicer output
+      const text = await res.text();
+      let body: any = text;
+      try { body = JSON.parse(text); } catch (err) { /* not JSON */ }
+
+      console.log("Sign-up response status:", res.status);
+      console.log("Sign-up response body:", body);
+
       if (res.ok) {
-        // Redirect to sign-in page after successful registration
+        alert("Registration successful");
         router.push("/auth/sign-in");
       } else {
-        const data: { message?: string } = await res.json();
-        alert(data.message || "Failed to sign up");
+        // Show specific server message if available
+        const serverMsg = typeof body === "object" ? JSON.stringify(body) : String(body);
+        alert(`Sign-up failed (status ${res.status}): ${servermsgOr(body)}`);
       }
     } catch (error) {
-      console.error("Sign-up error:", error);
-      alert("Something went wrong, please try again.");
+      console.error("Sign-up fetch error:", error);
+      alert(`Network or fetch error: ${String(error)}`);
     }
   };
+
+  // small helper for alert string
+  function servermsgOr(body: any) {
+    if (!body) return "No response body";
+    if (typeof body === "string") return body;
+    if (body.error) return body.error;
+    if (body.detail) return body.detail;
+    return JSON.stringify(body);
+  }
 
   return (
     <div className="flex items-center justify-center min-h-screen">
