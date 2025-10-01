@@ -2,8 +2,17 @@
 
 import Link from "next/link";
 import Hero from "@/components/Hero";
+import { useRouter } from "next/navigation";
 
 export default function HomePage() {
+  const router = useRouter();
+
+  const handleSignOut = () => {
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("user");
+    router.push("/"); // redirect to landing page
+  };
+
   return (
     <main className="min-h-screen flex flex-col items-center justify-start bg-gradient-to-b from-blue-50 to-white">
       {/* Hero Section */}
@@ -33,6 +42,14 @@ export default function HomePage() {
             Learn More
           </Link>
         </div>
+
+        {/* Sign Out Button */}
+        <button
+          onClick={handleSignOut}
+          className="mt-6 px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition"
+        >
+          Sign Out
+        </button>
       </div>
 
       {/* Feature Highlights */}
