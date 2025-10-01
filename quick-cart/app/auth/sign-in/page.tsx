@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import axiosInstance from "../../../axiosInstance";
-import axios from "axios";
 
 export default function SignIn() {
   const router = useRouter();
@@ -31,25 +30,21 @@ export default function SignIn() {
 
       // Redirect to home
       router.push("/main/home");
-    } catch (err: unknown) {
-      if (axios.isAxiosError(err)) {
-        console.error("Login error:", err.response?.data);
+    } catch (err: any) {
+      console.error("Login error:", err.response?.data);
 
-        if (err.response?.data?.error) {
-          setError(err.response.data.error);
-        } else if (err.response?.data) {
-          const errorData = err.response.data;
-          if (typeof errorData === "object") {
-            const errorMessages = Object.values(errorData as Record<string, string>).join(", ");
-            setError(errorMessages);
-          } else {
-            setError("Login failed. Please try again.");
-          }
+      if (err.response?.data?.error) {
+        setError(err.response.data.error);
+      } else if (err.response?.data) {
+        const errorData = err.response.data;
+        if (typeof errorData === "object") {
+          const errorMessages = Object.values(errorData).join(", ");
+          setError(errorMessages);
         } else {
-          setError("Network error. Please check your connection.");
+          setError("Login failed. Please try again.");
         }
       } else {
-        setError("An unexpected error occurred.");
+        setError("Network error. Please check your connection.");
       }
     } finally {
       setLoading(false);
