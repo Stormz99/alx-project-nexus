@@ -1,36 +1,100 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Quick Cart Frontend
 
-## Getting Started
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Abiodun%20Ijiola-blue?logo=linkedin)](https://www.linkedin.com/in/abiodun-ijiola/)
 
-First, run the development server:
+## Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Quick Cart is a modern e-commerce frontend built using Next.js and Tailwind CSS. This project showcases my ability to create a performant, responsive, and scalable frontend application that integrates seamlessly with backend APIs.
+
+## Features
+
+- **User Authentication**: Sign-up and sign-in functionality.
+- **Product Browsing**: View and filter products efficiently.
+- **Shopping Cart**: Add/remove items and view cart totals dynamically.
+- **Responsive Design**: Optimized for mobile, tablet, and desktop.
+- **Reusable Components**: Buttons, Navbar, Hero section, SearchBar, ShoppingCartIcon.
+- **Custom Hooks**: `useCart`, `useFilters`, `usePagination` for state management and functionality.
+
+## Project Structure
+
+```
+quick-cart/
+├── app/             # Next.js app routes and layout
+├── components/      # Reusable UI components
+├── constants/       # Constants and static data
+├── hooks/           # Custom React hooks
+├── lib/             # Utility functions
+├── public/          # Fonts, images, and assets
+├── package.json     # Project dependencies
+├── tsconfig.json    # TypeScript configuration
+├── next.config.ts   # Next.js configuration
+└── globals.css      # Global styles
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## API Endpoints
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+These endpoints are used for frontend-backend communication:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Local Backend:
+  - `http://localhost:3000`
+  - `http://localhost:3000/auth/sign-up`
+  - `http://localhost:3000/auth/sign-in`
 
-## Learn More
+- Render Backend:
+  - `https://gocart-backend-oakq.onrender.com/`
+  - Health Check: `https://gocart-backend-oakq.onrender.com/health`
+  - Swagger Docs: `https://gocart-backend-oakq.onrender.com/api-docs`
 
-To learn more about Next.js, take a look at the following resources:
+## Technologies Used
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Frontend Framework**: Next.js (React)
+- **Styling**: Tailwind CSS
+- **TypeScript**: Strongly-typed components and hooks
+- **State Management**: React hooks and context API
+- **Version Control**: Git and GitHub
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Installation
 
-## Deploy on Vercel
+```bash
+# Clone the repository
+git clone <https://github.com/Stormz99/alx-project-nexus>
+cd quick-cart
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Install dependencies
+npm install
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# Run the development server
+npm run dev
+```
+
+## Contributing
+
+I welcome contributions from anyone interested in improving this project. Feel free to open issues or submit pull requests.
+
+## License
+
+This project is licensed under the MIT License.
+
+```
+MIT License
+
+Copyright (c) 2025 Abiodun Ijiola
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
