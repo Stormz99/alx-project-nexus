@@ -12,14 +12,14 @@ export default function SignInPage() {
     e.preventDefault();
 
     try {
-      const res = await fetch("/api/auth/sign-in", {
+      const res = await fetch("/api/accounts/login/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
 
       if (res.ok) {
-        router.push("/");
+        router.push("/"); // ✅ redirect to home (or change to /dashboard if you prefer)
       } else {
         const data: { message?: string } = await res.json();
         alert(data.message || "Failed to sign in");

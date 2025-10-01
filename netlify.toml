@@ -6,7 +6,9 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
+# API Proxy to Render backend
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
+  from = "/api/*"
+  to = "https://gocart-backend-oakq.onrender.com/:splat"
   status = 200
+  force = true

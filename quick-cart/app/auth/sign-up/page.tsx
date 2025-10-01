@@ -16,7 +16,7 @@ export default function SignUpPage() {
     e.preventDefault();
 
     try {
-      const res = await fetch("/api/auth/sign-up", {
+      const res = await fetch("/api/accounts/register/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -30,7 +30,7 @@ export default function SignUpPage() {
       });
 
       if (res.ok) {
-        router.push("/auth/sign-in");
+        router.push("/auth/sign-in"); // ✅ redirect to login after signup
       } else {
         const data: { message?: string } = await res.json();
         alert(data.message || "Failed to sign up");
@@ -43,7 +43,10 @@ export default function SignUpPage() {
 
   return (
     <div className="flex items-center justify-center min-h-screen">
-      <form onSubmit={handleSubmit} className="p-6 bg-white rounded shadow-md space-y-2">
+      <form
+        onSubmit={handleSubmit}
+        className="p-6 bg-white rounded shadow-md space-y-2"
+      >
         <h1 className="mb-4 text-xl font-bold">Sign Up</h1>
         <input
           type="text"
