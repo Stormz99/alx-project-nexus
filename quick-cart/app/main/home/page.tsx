@@ -3,22 +3,21 @@
 import Link from "next/link";
 import Hero from "@/components/Hero";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function HomePage() {
   const router = useRouter();
 
-  const handleSignOut = () => {
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("user");
-    router.push("/"); // redirect to landing page
-  };
+  // Redirect to landing if not logged in
+  useEffect(() => {
+    const token = localStorage.getItem("access_token");
+    if (!token) router.replace("/");
+  }, [router]);
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-start bg-gradient-to-b from-blue-50 to-white">
-      {/* Hero Section */}
       <Hero />
 
-      {/* CTA Section */}
       <div className="text-center space-y-6 max-w-2xl mt-16 px-4">
         <h1 className="text-5xl font-extrabold text-black">
           Welcome to <span className="text-blue-600">GoCart</span>
@@ -42,14 +41,6 @@ export default function HomePage() {
             Learn More
           </Link>
         </div>
-
-        {/* Sign Out Button */}
-        <button
-          onClick={handleSignOut}
-          className="mt-6 px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition"
-        >
-          Sign Out
-        </button>
       </div>
 
       {/* Feature Highlights */}
