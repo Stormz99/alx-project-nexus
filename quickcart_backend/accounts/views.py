@@ -19,7 +19,7 @@ def register(request):
                 'refresh': str(refresh),
                 'access': str(refresh.access_token)
             }
-        })
+        }, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])
@@ -36,10 +36,10 @@ def login(request):
                 'refresh': str(refresh),
                 'access': str(refresh.access_token)
             }
-        })
+        }, status=status.HTTP_200_OK)
     return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def check_auth(request):
-    return Response({'authenticated': True, 'user': UserSerializer(request.user).data})
+    return Response({'authenticated': True, 'user': UserSerializer(request.user).data}, status=status.HTTP_200_OK)

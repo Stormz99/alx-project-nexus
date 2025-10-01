@@ -1,11 +1,10 @@
 from rest_framework import serializers
-from django.contrib.auth import authenticate
 from .models import User
 
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
     password_confirm = serializers.CharField(write_only=True)
-    
+
     class Meta:
         model = User
         fields = ['email', 'username', 'first_name', 'last_name', 'password', 'password_confirm']
