@@ -16,7 +16,8 @@ export default function SignUpPage() {
     e.preventDefault();
 
     try {
-      const res = await fetch("/api/accounts/register/", {
+      // Send registration request to backend
+      const res = await fetch("/api/auth/register/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -30,7 +31,8 @@ export default function SignUpPage() {
       });
 
       if (res.ok) {
-        router.push("/auth/sign-in"); // ✅ redirect to login after signup
+        // Redirect to sign-in page after successful registration
+        router.push("/auth/sign-in");
       } else {
         const data: { message?: string } = await res.json();
         alert(data.message || "Failed to sign up");

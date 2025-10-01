@@ -4,7 +4,7 @@ import { FaShoppingCart } from "react-icons/fa";
 
 type ShoppingCartIconProps = {
   count?: number;
-  onClick?: () => void; // Click handler
+  onClick?: () => void;
 };
 
 const ShoppingCartIcon: React.FC<ShoppingCartIconProps> = ({ count = 0, onClick }) => {
