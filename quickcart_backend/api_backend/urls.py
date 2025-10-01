@@ -24,10 +24,10 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    path('', api_root, name='api-root'),  
+    path('', api_root, name='api-root'),
     path('admin/', admin.site.urls),
-    path('api/auth/', include('accounts.urls')),
+    path('api/auth/', include('accounts.urls')),  # include accounts URLs
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
-    path('health/', lambda request: JsonResponse({'status': 'healthy'})),  # optional healthcheck
+    path('health/', lambda request: JsonResponse({'status': 'healthy'}), name='health'),
 ]
